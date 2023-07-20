@@ -1,13 +1,21 @@
+import { useEffect } from "react";
 import { MessageCircle } from "lucide-react";
 
 import { Header } from "../components/header";
 import { Module } from "../components/module";
 import { Video } from "../components/video";
 import { useAppSelector } from "../store";
+import { useCurrentLesson } from "../store/slices/player";
 
 export function Player() {
   const modules = useAppSelector((state) => {
     return state.player.course.modules;
+  });
+
+  const { currentLesson } = useCurrentLesson();
+
+  useEffect(() => {
+    document.title = `Assistindo: ${currentLesson.title}`;
   });
 
   return (
