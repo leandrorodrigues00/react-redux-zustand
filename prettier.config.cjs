@@ -16,15 +16,17 @@ module.exports = {
     "^@/config/(.*)$",
     "^@/lib/(.*)$",
     "^@/hooks/(.*)$",
+    "^@/store(.*)$",
     "^@/components/ui/(.*)$",
     "^@/components/(.*)$",
     "^@/styles/(.*)$",
     "^@/app/(.*)$",
+    "^@/pages/(.*)$",
+
     "",
     "^[./]",
   ],
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
-  importOrderTypeScriptVersion: "5.0.0",
 
   plugins: [
     require("prettier-plugin-tailwindcss"),

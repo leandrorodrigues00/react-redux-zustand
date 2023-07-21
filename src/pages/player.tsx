@@ -3,12 +3,14 @@ import { MessageCircle } from "lucide-react";
 
 import { Header } from "../components/header";
 import { Module } from "../components/module";
+import ModuleSkeleton from "../components/module-skeleton";
 import { Video } from "../components/video";
 import { useAppDispatch, useAppSelector } from "../store";
 import { loadCourse, useCurrentLesson } from "../store/slices/player";
 
 export function Player() {
   const dispatch = useAppDispatch();
+  const isCourseLoading = useAppSelector((state) => state.player.isLoading);
 
   const modules = useAppSelector((state) => {
     return state.player.course?.modules;
@@ -18,13 +20,13 @@ export function Player() {
 
   useEffect(() => {
     dispatch(loadCourse());
-  });
+  }, []);
 
   useEffect(() => {
     if (currentLesson) {
       document.title = `Assistindo: ${currentLesson.title}`;
     }
-  });
+  }, [currentLesson]);
 
   return (
     <div className="flex h-screen items-center justify-center bg-zinc-950 text-zinc-50">
@@ -45,7 +47,13 @@ export function Player() {
           </div>
 
           <aside className="absolute bottom-0 right-0 top-0 w-80 divide-y-2 divide-zinc-900 overflow-y-scroll  border-l border-zinc-800 bg-zinc-900 scrollbar-thin scrollbar-track-zinc-950 scrollbar-thumb-zinc-800">
-            {modules &&
+            {isCourseLoading ? (
+              <>
+                <ModuleSkeleton />
+                <ModuleSkeleton />
+              </>
+            ) : (
+              modules &&
               modules.map((module, index) => (
                 <Module
                   key={module.id}
@@ -53,7 +61,8 @@ export function Player() {
                   title={module.title}
                   lessonsAmount={module.lessons.length}
                 />
-              ))}
+              ))
+            )}
           </aside>
         </main>
       </div>

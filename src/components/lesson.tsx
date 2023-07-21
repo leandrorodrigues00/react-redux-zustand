@@ -18,7 +18,7 @@ export function Lesson({
       onClick={onPlay}
       data-active={isCurrent}
       disabled={isCurrent}
-      className="flex items-center gap-3 text-sm text-zinc-400 data-[active=true]:text-emerald-400 enabled:hover:text-zinc-100 "
+      className="flex items-center gap-3 text-sm text-zinc-400 data-[active=true]:text-emerald-400 enabled:hover:text-zinc-100"
     >
       {isCurrent ? (
         <PlayCircle className="h-4 w-4 text-emerald-400" />
