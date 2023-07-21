@@ -1,7 +1,6 @@
 import { ChevronDown } from "lucide-react";
 
-import { useAppDispatch, useAppSelector } from "../store";
-import { play } from "../store/slices/player";
+import { useStore } from "../zustand-store";
 import { Lesson } from "./lesson";
 import {
   Collapsible,
@@ -16,17 +15,17 @@ interface ModuleProps {
 }
 
 export function Module({ lessonsAmount, moduleIndex, title }: ModuleProps) {
-  const dispatch = useAppDispatch();
+  const { currentLessonIndex, currentModuleIndex, play, lessons } = useStore(
+    (store) => {
+      return {
+        currentLessonIndex: store.currentLessonIndex,
+        currentModuleIndex: store.currentModuleIndex,
+        play: store.play,
+        lessons: store.course?.modules[moduleIndex].lessons,
+      };
+    }
+  );
 
-  const { currentLessonIndex, currentModuleIndex } = useAppSelector((state) => {
-    const { currentModuleIndex, currentLessonIndex } = state.player;
-
-    return { currentModuleIndex, currentLessonIndex };
-  });
-
-  const lessons = useAppSelector((state) => {
-    return state.player.course?.modules[moduleIndex].lessons;
-  });
   return (
     <Collapsible className="group" defaultOpen={moduleIndex === 0}>
       <CollapsibleTrigger className="flex w-full items-center gap-3 bg-zinc-800 p-4">
@@ -56,7 +55,7 @@ export function Module({ lessonsAmount, moduleIndex, title }: ModuleProps) {
                   title={lesson.title}
                   duration={lesson.duration}
                   isCurrent={isCurrent}
-                  onPlay={() => dispatch(play([moduleIndex, lessonIndex]))}
+                  onPlay={() => play([moduleIndex, lessonIndex])}
                 />
               );
             })}
