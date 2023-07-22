@@ -1,5 +1,3 @@
-// This file is not used in the project, it is just for comparison with zustand.
-
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
