@@ -23,10 +23,11 @@ By implementing the same features using both libraries, this project offers a co
 
 ## 🚀 Technologies
 
-- [Tailwind](https://tailwindcss.com/)
 - [Radix UI](https://www.radix-ui.com/)
 - [React-player](https://www.npmjs.com/package/react-player)
 - [Redux](https://redux.js.org/)
+- [Json-server](https://github.com/typicode/json-server)
+- [Tailwind](https://tailwindcss.com/)
 - [Zustand](https://github.com/pmndrs/zustand)
 
 ## 💻 Getting started
